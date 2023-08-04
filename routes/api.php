@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PositionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,6 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-//Route::prefix('position')->group(function (){
-//   Route::get('/',function (){
-//
-//   });
-//});
+Route::prefix('position')->group(function (){
+   Route::get('/',[PositionsController::class,'index']);
+});
