@@ -2,20 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\Stories;
+use App\Models\Story;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Stories>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Story>
  */
-class StoriesFactory extends Factory
+class StoryFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    protected $model = Stories::class;
+    protected $model = Story::class;
     public function definition()
     {
         return [

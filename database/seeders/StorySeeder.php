@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Stories;
+use App\Models\Story;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +18,6 @@ class StorySeeder extends Seeder
      */
     public function run()
     {
-        Stories::factory()->count(10)->create();
+        Story::factory()->count(1)->create();
     }
 }

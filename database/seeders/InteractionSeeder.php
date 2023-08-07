@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Interactions;
+use App\Models\Interaction;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,6 +15,6 @@ class InteractionSeeder extends Seeder
      */
     public function run()
     {
-        Interactions::factory()->count(70)->create();
+        Interaction::factory()->count(10)->create();
     }
 }

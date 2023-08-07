@@ -2,7 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PositionsController;
+use App\Http\Controllers\PositionController;
+use App\Http\Controllers\WordController;
+use App\Http\Controllers\StoryController;
+use App\Http\Controllers\InteractionsController;
+use App\Http\Controllers\PronounsController;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +24,27 @@ use App\Http\Controllers\PositionsController;
 //    return $request->user();
 //});
 
-Route::prefix('position')->group(function (){
-   Route::get('/',[PositionsController::class,'index']);
+Route::prefix('positions')->group(function (){
+   Route::get('/',[PositionController::class,'index']);
+});
+Route::prefix('words')->group(function (){
+    Route::get('/',[WordController::class,'index']);
+});
+Route::prefix('story')->group(function (){
+    Route::get('/',[StoryController::class,'index']);
+    Route::delete('/{id}',[StoryController::class,'delete']);
+    Route::post('/',[StoryController::class,'create']);
+    Route::put('/',[StoryController::class,'update']);
+});
+Route::prefix('page')->group(function (){
+    Route::get('/',[PageController::class,'index']);
+    Route::delete('/{id}',[PageController::class,'delete']);
+    Route::post('/',[PageController::class,'create']);
+    Route::put('/',[PageController::class,'update']);
+});
+Route::prefix('interactions')->group(function (){
+    Route::get('/',[InteractionsController::class,'index']);
+});
+Route::prefix('pronouns')->group(function (){
+    Route::get('/',[PronounsController::class,'index']);
 });

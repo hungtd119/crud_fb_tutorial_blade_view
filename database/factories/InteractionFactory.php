@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Pages;
-use App\Models\Pronouns;
+use App\Models\Page;
+use App\Models\Pronoun;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Interactions>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Interaction>
  */
-class InteractionsFactory extends Factory
+class InteractionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,8 +22,7 @@ class InteractionsFactory extends Factory
             'id'=>$this->faker->numerify("########"),
             'bg'=>$this->faker->colorName(),
             'image'=>$this->faker->imageUrl,
-            'page_id'=>Pages::all()->random()->id,
-            'soundText'=>Pronouns::all()->random()->id,
+            'page_id'=>Page::all()->random()->id,
         ];
     }
 }

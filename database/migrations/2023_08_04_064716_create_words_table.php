@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('endTime');
             $table->unsignedBigInteger('page_id');
             $table->timestamps();
-            $table->foreign('page_id')->references('id')->on('pages');
         });
     }
 

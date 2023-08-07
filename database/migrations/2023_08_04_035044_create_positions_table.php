@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('height');
             $table->unsignedBigInteger('interaction_id');
             $table->timestamps();
-            $table->foreign('interaction_id')->references('id')->on('interactions');
         });
     }
 

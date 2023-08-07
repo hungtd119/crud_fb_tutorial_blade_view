@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Pages;
+use App\Models\Page;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,6 +15,6 @@ class PageSeeder extends Seeder
      */
     public function run()
     {
-        Pages::factory()->count(10)->create();
+        Page::factory()->count(2)->create();
     }
 }

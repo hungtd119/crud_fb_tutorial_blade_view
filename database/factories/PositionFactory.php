@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Interactions;
+use App\Models\Interaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Positions>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Position>
  */
-class PositionsFactory extends Factory
+class PositionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -23,7 +23,7 @@ class PositionsFactory extends Factory
             'position_y'=>$this->faker->numerify("###"),
             'width'=>$this->faker->numerify("###"),
             'height'=>$this->faker->numerify("###"),
-            'interaction_id'=>Interactions::all()->random()->id,
+            'interaction_id'=>Interaction::all()->random()->id,
         ];
     }
 }

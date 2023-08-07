@@ -16,12 +16,9 @@ return new class extends Migration
         Schema::create('pages', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
             $table->string('image');
-            $table->string('sentence');
-            $table->string('audio');
             $table->integer('page_number');
             $table->unsignedBigInteger('story_id');
             $table->timestamps();
-            $table->foreign('story_id')->references('id')->on('stories');
         });
     }
 

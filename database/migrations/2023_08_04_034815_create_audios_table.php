@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('interactions', function (Blueprint $table) {
+        Schema::create('audios', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->string('bg');
-            $table->string('image');
-            $table->unsignedBigInteger('page_id');
+            $table->string('filename');
+            $table->string('path');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('interactions');
+        Schema::dropIfExists('audio');
     }
 };

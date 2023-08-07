@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Pronoun;
+use App\Models\Pronouninteraction;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PronounSeeder extends Seeder
+class PronouninteractionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class PronounSeeder extends Seeder
      */
     public function run()
     {
-        Pronoun::factory()->count(4)->create();
+        Pronouninteraction::factory()->count(10)->create();
     }
 }

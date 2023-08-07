@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('pronouns', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->string('text');
-            $table->string('audio');
+            $table->unsignedBigInteger('text');
+            $table->unsignedBigInteger('audio');
             $table->timestamps();
         });
     }

@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Pages;
+use App\Models\Page;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Words>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Word>
  */
-class WordsFactory extends Factory
+class WordFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,7 +22,7 @@ class WordsFactory extends Factory
             'wordIndex'=>$this->faker->numerify("##"),
             'startTime'=>$this->faker->numerify("####"),
             'endTime'=>$this->faker->numerify("####"),
-            'page_id'=>Pages::all()->random()->id,
+            'page_id'=>Page::all()->random()->id,
         ];
     }
 }

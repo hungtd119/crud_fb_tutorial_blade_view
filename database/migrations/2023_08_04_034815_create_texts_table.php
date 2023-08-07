@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('interactions',function (Blueprint $table){
-            $table->foreign('soundText')->references('id')->on('pronouns');
+        Schema::create('texts', function (Blueprint $table) {
+            $table->unsignedBigInteger('id')->primary();
+            $table->string('content');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-
+        Schema::dropIfExists('texts');
     }
 };

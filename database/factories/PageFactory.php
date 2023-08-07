@@ -2,31 +2,29 @@
 
 namespace Database\Factories;
 
-use App\Models\Pages;
-use App\Models\Stories;
+use App\Models\Page;
+use App\Models\Story;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pages>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Page>
  */
-class PagesFactory extends Factory
+class PageFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    protected $model = Pages::class;
+    protected $model = Page::class;
     public function definition()
     {
         return [
             'id'=>$this->faker->numerify("########"),
             'image'=>$this->faker->imageUrl,
-            'sentence'=>$this->faker->sentence,
-            'audio'=>$this->faker->url,
             'page_number'=>$this->faker->numerify,
-            'story_id'=>Stories::all()->random()->id,
+            'story_id'=>Story::all()->random()->id,
         ];
     }
 }

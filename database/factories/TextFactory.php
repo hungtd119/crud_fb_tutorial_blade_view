@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pronouns>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Text>
  */
-class PronounsFactory extends Factory
+class TextFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +18,7 @@ class PronounsFactory extends Factory
     {
         return [
             'id'=>$this->faker->numerify("########"),
-            'text'=>$this->faker->word,
-            'audio'=>$this->faker->url,
+            'content'=>$this->faker->sentence,
         ];
     }
 }

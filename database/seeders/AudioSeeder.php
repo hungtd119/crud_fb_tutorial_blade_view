@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Pronoun;
+use App\Models\Audio;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PronounSeeder extends Seeder
+class AudioSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class PronounSeeder extends Seeder
      */
     public function run()
     {
-        Pronoun::factory()->count(4)->create();
+        Audio::factory()->count(10)->create();
     }
 }
