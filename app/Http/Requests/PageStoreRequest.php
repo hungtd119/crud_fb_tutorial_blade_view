@@ -26,9 +26,7 @@ class PageStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'image'=>'required',
-            'sentence'=>'required|max:200',
-            'audio'=>'required',
+            'image_id'=>'required',
             'page_number'=>'required',
             'story_id'=>'required',
         ];

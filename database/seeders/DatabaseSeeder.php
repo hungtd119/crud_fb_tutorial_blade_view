@@ -21,16 +21,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
+            ImageSeeder::class,
             AudioSeeder::class,
-            TextSeeder::class,
             StorySeeder::class,
-            PronounSeeder::class,
             PageSeeder::class,
-            PronounpageSeeder::class,
-            WordSeeder::class,
+            TextSeeder::class,
             InteractionSeeder::class,
             PositionSeeder::class,
-            PronouninteractionSeeder::class
+            TextConfigSeeder::class
         ]);
     }
 }

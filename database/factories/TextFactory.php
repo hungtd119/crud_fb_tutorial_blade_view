@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Audio;
+use App\Models\Position;
+use App\Models\Word;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +21,10 @@ class TextFactory extends Factory
     {
         return [
             'id'=>$this->faker->numerify("########"),
-            'content'=>$this->faker->sentence,
+            'text'=>$this->faker->sentence,
+            'icon'=>$this->faker->name,
+            'audio_id'=>Audio::all()->random()->id,
+            'wordSync'=>$this->faker->sentence,
         ];
     }
 }

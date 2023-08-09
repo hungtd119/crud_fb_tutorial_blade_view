@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->string('image');
+            $table->unsignedBigInteger('image_id');
             $table->integer('page_number');
             $table->unsignedBigInteger('story_id');
             $table->timestamps();

@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Pronouninteraction;
+use App\Models\Audio;
+use App\Models\Image;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PronouninteractionSeeder extends Seeder
+class ImageSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +16,6 @@ class PronouninteractionSeeder extends Seeder
      */
     public function run()
     {
-        Pronouninteraction::factory()->count(10)->create();
+        Image::factory()->count(10)->create();
     }
 }

@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('texts', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->string('content');
+            $table->string('text');
+            $table->string('icon');
+            $table->unsignedBigInteger('audio_id');
+            $table->string('wordSync');
             $table->timestamps();
         });
     }

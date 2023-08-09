@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Audio extends Model
 {
@@ -12,8 +13,8 @@ class Audio extends Model
     protected $table = "audios";
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = ['id','filename','path'];
-    public function pronouns ():HasMany{
-        return $this->hasMany(Pronoun::class);
+    protected $fillable = ['id','filename','path','time'];
+    public function text ():HasOne{
+        return $this->hasOne(Text::class,);
     }
 }

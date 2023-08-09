@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Image;
 use App\Models\Story;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,10 +22,11 @@ class StoryFactory extends Factory
         return [
             'id'=>$this->faker->numerify("########"),
             'title' => $this->faker->title,
-            'image' => $this ->faker->imageUrl,
+            'image_id' =>Image::all()->random()->id,
             'author'=>$this->faker->name,
             'illustrator'=>$this->faker->name,
             'level'=>$this->faker->word,
+            'coin'=>$this->faker->numerify
         ];
     }
 }

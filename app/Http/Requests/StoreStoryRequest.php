@@ -27,10 +27,11 @@ class StoreStoryRequest extends FormRequest
     {
         return [
             'title'=>'required|unique:stories|max:100',
-            'image'=>'required',
+            'image_id'=>'required',
             'author'=>'required',
             'illustrator'=>'required',
             'level'=>'required',
+            'coin'=>'required'
         ];
     }
     public function failedValidation(Validator $validator)

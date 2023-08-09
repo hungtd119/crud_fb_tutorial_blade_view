@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pronoun_interaction', function (Blueprint $table) {
+        Schema::create('text_config', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->unsignedBigInteger('pronoun_id');
-            $table->unsignedBigInteger('interaction_id');
+            $table->unsignedBigInteger('page_id');
+            $table->unsignedBigInteger('text_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pronoun_interaction');
+        Schema::dropIfExists('text_config');
     }
 };

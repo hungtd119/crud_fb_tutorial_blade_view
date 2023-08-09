@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('interactions', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
             $table->string('bg');
-            $table->string('image');
+            $table->string('blink');
             $table->unsignedBigInteger('page_id');
+            $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('text_id');
             $table->timestamps();
         });
     }

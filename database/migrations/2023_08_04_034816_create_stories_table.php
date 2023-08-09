@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('stories', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
             $table->string('title');
-            $table->string('image');
+            $table->unsignedBigInteger('image_id');
             $table->string('author');
             $table->string('illustrator');
             $table->string('level');
+            $table->unsignedInteger('coin');
             $table->timestamps();
         });
     }

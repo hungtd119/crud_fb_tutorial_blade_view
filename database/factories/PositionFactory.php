@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Interaction;
+use App\Models\Text;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,6 +24,7 @@ class PositionFactory extends Factory
             'position_y'=>$this->faker->numerify("###"),
             'width'=>$this->faker->numerify("###"),
             'height'=>$this->faker->numerify("###"),
+            'text_id'=>Text::all()->random()->id,
             'interaction_id'=>Interaction::all()->random()->id,
         ];
     }

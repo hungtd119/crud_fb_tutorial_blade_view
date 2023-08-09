@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id')->primary();
             $table->string('filename');
             $table->string('path');
+            $table->unsignedInteger('time');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('audio');
+        Schema::dropIfExists('audios');
     }
 };

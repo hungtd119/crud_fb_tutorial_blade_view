@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pronouns', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->unsignedBigInteger('text');
-            $table->unsignedBigInteger('audio');
+            $table->string('path');
+            $table->string('filename');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pronouns');
+        Schema::dropIfExists('images');
     }
 };

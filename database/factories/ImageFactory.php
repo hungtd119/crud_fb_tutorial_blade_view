@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Audio>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Image>
  */
-class AudioFactory extends Factory
+class ImageFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,10 +17,9 @@ class AudioFactory extends Factory
     public function definition()
     {
         return [
-            'id'=>$this->faker->numerify("########"),
-            'filename'=>$this->faker->name,
+            'id'=>$this->faker->numerify('########'),
             'path'=>$this->faker->url,
-            'time'=>$this->faker->numerify,
+            'filename'=>$this->faker->name
         ];
     }
 }
