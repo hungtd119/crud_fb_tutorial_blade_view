@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\PageNotFoundException;
 use App\Http\Requests\PageStoreRequest;
 use App\Http\Resources\DataCollection;
 use App\Models\Page;
@@ -21,6 +22,18 @@ class PageController extends Controller
         $page = $this->pageRepository->getAllPage();
         return response(new DataCollection($page),200);
     }
+    public function findById($id){
+        try {
+            $page = $this->pageRepository->getPageById($id);
+            return response([
+                'success'=>true,
+                'message'=>'find page by id',
+                'data'=>$page
+            ]);
+        }catch (PageNotFoundException $exception){
+            throw $exception;
+        }
+    }
     public function create (PageStoreRequest $request){
         $createdPage = $this->pageRepository->createPage($request);
         if ($createdPage['success'])
@@ -28,15 +41,28 @@ class PageController extends Controller
         return \response($createdPage,404);
     }
     public function delete ($id){
-        $deletedPage = $this->pageRepository->deletePage($id);
-        if ($deletedPage['success'])
-            return response($deletedPage,200);
-        return response($deletedPage,404);
+        try {
+            $deletedPage = $this->pageRepository->deletePage($id);
+            return response([
+                'success'=>true,
+                'message'=>'deleted page',
+            ]);
+        }
+        catch (PageNotFoundException $exception){
+            throw $exception;
+        }
     }
     public function update (PageStoreRequest $request){
-        $updatedPage = $this->pageRepository->updatePage($request);
-        if ($updatedPage['success'])
-            return response($updatedPage,200);
-        return response($updatedPage,404);
+        try {
+            $updatedPage = $this->pageRepository->updatePage($request);
+            return response([
+                'success'=>true,
+                'message'=>'updated page',
+                'data'=>$updatedPage
+            ]);
+        }
+        catch (PageNotFoundException $exception){
+            throw $exception;
+        }
     }
 }

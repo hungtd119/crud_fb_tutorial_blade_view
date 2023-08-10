@@ -14,6 +14,7 @@ class Position extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     protected $fillable = ['id','position_x','position_y','width','height','interaction_id','text_id'];
+    protected $hidden = ['interaction_id','text_id'];
     public function interactions () : BelongsTo{
         return $this->belongsTo(Interaction::class,'interaction_id');
     }

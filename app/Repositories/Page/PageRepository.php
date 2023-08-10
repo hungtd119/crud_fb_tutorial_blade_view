@@ -2,78 +2,96 @@
 
 namespace App\Repositories\Page;
 
+use App\Exceptions\ErrorException;
 use App\Http\Requests\PageStoreRequest;
 use App\Models\Page;
+use App\Repositories\Helper\HelperInterface;
+use Faker\Core\File;
+use Illuminate\Database\QueryException;
 
 class PageRepository implements PageInterface
 {
-
+    protected $helperRepository;
+    public function __construct(HelperInterface $helperRepository)
+    {
+        $this->helperRepository = $helperRepository;
+    }
     public function getAllPage()
     {
         // TODO: Implement getAllPage() method.
-        $pages = Page::with('image','texts.audio','texts.position','texts.position','interactions.positions','interactions.image')->get();
-        return $pages;
+        try {
+            $pages = Page::with('image','texts.audio','texts.position','texts.position','interactions.positions','interactions.image','interactions.text')->get();
+            return $pages;
+        }
+        catch (QueryException $exception){
+            throw ErrorException::queryFailed($exception->getMessage());
+        }
     }
 
     public function deletePage($id)
     {
         // TODO: Implement deletePage() method.
-        $page = Page::find($id);
-        if ($page){
+        try {
+            $page = Page::find($id);
+            if (!$page)
+                throw ErrorException::notFound('Page not found with id '.$id);
             $page->delete();
-            return [
-                'success'=>true,
-                'message'=>'delete page '. $id . ' successfully',
-            ];
+            return true;
         }
-        return [
-            'success'=>false,
-            'message'=>'page not found',
-        ];
+        catch (QueryException $exception){
+            throw ErrorException::queryFailed($exception->getMessage());
+        }
     }
 
     public function createPage(PageStoreRequest $request)
     {
         // TODO: Implement createPage() method.
-        $page = new Page();
-        $page->id = $this->generateUniqueCode();
-        $page->image_id = $request->image_id;
-        $page->page_number = $request->page_number;
-        $page->story_id = $request->story_id;
-        $page->save();
-        return [
-            'success'=>true,
-            'message'=>'create page successfully',
-            'page'=>$page
-        ];
-    }
-    public function generateUniqueCode()
-    {
-        do {
-            $code = random_int(100000, 999999);
-        } while (Page::where("id", "=", $code)->first());
-
-        return $code;
+        try {
+            $page = new Page();
+            $page->id = $this->helperRepository->generateUniqueCode('Page');
+            $page->image_id = $request->image_id;
+            $page->page_number = $request->page_number;
+            $page->story_id = $request->story_id;
+            $page->save();
+            return [
+                'success'=>true,
+                'message'=>'create page successfully',
+                'page'=>$page
+            ];
+        }
+        catch (QueryException $exception){
+            throw ErrorException::queryFailed($exception->getMessage());
+        }
     }
     public function updatePage(PageStoreRequest $request)
     {
         // TODO: Implement updatePage() method.
-        $page = Page::find($request->query('id'));
-        if ($page){
+        try {
+            $page = Page::find($request->query('id'));
+            if (!$page)
+                throw ErrorException::notFound('Page not found with id '.$request->query('id'));
             $page->image_id = $request->input('image_id');
             $page->page_number = $request->input('page_number');
             $page->story_id = $request->input('story_id');
-
             $page->save();
 
-            return [
-                'success'=>true,
-                'message'=>'updated page with id '.$request->query('id').' successfully',
-            ];
+            return $page;
         }
-        return [
-            'success'=>false,
-            'message'=>'page not found',
-        ];
+        catch (QueryException $exception){
+            throw ErrorException::queryFailed($exception->getMessage());
+        }
+    }
+
+    public function getPageById($id)
+    {
+        // TODO: Implement getPageById() method.
+        try {
+            $story= Page::with('image','texts.audio','texts.position','texts.position','interactions.positions','interactions.image','interactions.text')->find($id);
+            if (!$story)
+                throw ErrorException::notFound('Page not found with id '.$id);
+            return $story;
+        }catch (QueryException $exception){
+            throw ErrorException::queryFailed($exception->getMessage());
+        }
     }
 }

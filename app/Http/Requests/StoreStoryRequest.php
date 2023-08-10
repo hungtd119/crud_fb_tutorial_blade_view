@@ -26,7 +26,7 @@ class StoreStoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required|unique:stories|max:100',
+            'title'=>'required|max:100',
             'image_id'=>'required',
             'author'=>'required',
             'illustrator'=>'required',
@@ -40,7 +40,7 @@ class StoreStoryRequest extends FormRequest
             'success'=> false,
             'message'=> 'Validation errors',
             'data'   => $validator->errors()
-        ]));
+        ],404));
     }
     public function messages()
     {

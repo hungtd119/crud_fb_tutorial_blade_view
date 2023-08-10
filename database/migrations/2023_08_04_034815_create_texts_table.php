@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id')->primary();
             $table->string('text');
             $table->string('icon');
-            $table->unsignedBigInteger('audio_id');
             $table->string('wordSync');
             $table->timestamps();
         });

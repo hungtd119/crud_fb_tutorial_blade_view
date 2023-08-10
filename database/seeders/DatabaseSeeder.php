@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             ImageSeeder::class,
-            AudioSeeder::class,
             StorySeeder::class,
             PageSeeder::class,
             TextSeeder::class,
+            AudioSeeder::class,
             InteractionSeeder::class,
             PositionSeeder::class,
             TextConfigSeeder::class

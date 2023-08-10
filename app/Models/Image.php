@@ -13,7 +13,7 @@ class Image extends Model
     protected $table = 'images';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = ['id','path','filename'];
+    protected $fillable = ['id','path','filename','wordSync'];
     public function page () :HasOne{
         return $this->hasOne(Page::class);
     }

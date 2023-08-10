@@ -16,6 +16,7 @@ class Page extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     protected $fillable = ['id','image_id','page_number','story_id'];
+    protected $hidden = ['image_id','story_id'];
     public function stories ():BelongsTo{
         return $this -> belongsTo(Story::class,'story_id');
     }

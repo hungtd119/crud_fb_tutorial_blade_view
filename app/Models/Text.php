@@ -15,9 +15,10 @@ class Text extends Model
     protected $table = 'texts';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = ['id','text','icon','audio_id','wordSync'];
-    public function audio ():BelongsTo{
-        return $this->belongsTo(Audio::class,'audio_id');
+    protected $fillable = ['id','text','icon','wordSync'];
+    protected $hidden = ['audio_id','pivot'];
+    public function audio ():HasOne{
+        return $this->hasOne(Audio::class);
     }
     public function interaction ():HasOne{
         return $this->hasOne(Interaction::class);

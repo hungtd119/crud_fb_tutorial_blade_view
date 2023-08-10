@@ -15,6 +15,7 @@ class Story extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     protected $fillable = ['id','title','image_id','author','illustrator','level','coin'];
+    protected $hidden = ['image_id'];
     public function pages () : HasMany{
         return $this->hasMany(Page::class);
     }

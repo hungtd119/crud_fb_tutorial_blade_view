@@ -23,7 +23,6 @@ class TextFactory extends Factory
             'id'=>$this->faker->numerify("########"),
             'text'=>$this->faker->sentence,
             'icon'=>$this->faker->name,
-            'audio_id'=>Audio::all()->random()->id,
             'wordSync'=>$this->faker->sentence,
         ];
     }

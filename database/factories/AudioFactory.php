@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Text;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class AudioFactory extends Factory
             'filename'=>$this->faker->name,
             'path'=>$this->faker->url,
             'time'=>$this->faker->numerify,
+            'text_id'=>Text::all()->random()->id
         ];
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('filename');
             $table->string('path');
             $table->unsignedInteger('time');
+            $table->unsignedBigInteger('text_id');
             $table->timestamps();
         });
     }
