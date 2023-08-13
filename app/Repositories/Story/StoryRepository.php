@@ -9,6 +9,7 @@ use App\Http\Resources\DataCollection;
 use App\Models\Story;
 use App\Repositories\Helper\HelperInterface;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class StoryRepository implements StoryInterface
 {
@@ -23,6 +24,7 @@ class StoryRepository implements StoryInterface
         // TODO: Implement getAllStories() method.
         try {
             $stories = Story::with('image','pages.interactions.positions','pages.interactions.image','pages.image','pages.texts.audio','pages.texts.position')->get();
+            Log::info('Get all stories');
             return $stories;
         }
         catch (QueryException $exception){
@@ -38,6 +40,7 @@ class StoryRepository implements StoryInterface
             throw ErrorException::notFound('Story not exist with id : '.$id);
         }
         $story->delete();
+        Log::info('Deleted story with id: '.$id);
         return true;
     }
 
@@ -54,6 +57,9 @@ class StoryRepository implements StoryInterface
             $story->level = $request->level;
             $story->coin = $request->coin;
             $story->save();
+            Log::info('Created a story',[
+                'story'=>$story
+            ]);
             return [
                 "success"=>true,
                 "message"=>"inserted story success",
@@ -77,6 +83,7 @@ class StoryRepository implements StoryInterface
         $story->illustrator = $request->input('illustrator');
         $story->level = $request->input('level');
         $story->save();
+        Log::info('Updated a story with id: '.$request->query('id'));
         return $story;
     }
 
@@ -86,6 +93,7 @@ class StoryRepository implements StoryInterface
         $story= Story::with('image','pages.interactions.positions','pages.interactions.image','pages.interactions.text','pages.image','pages.texts.audio','pages.texts.position')->find($id);
         if (!$story)
             throw ErrorException::notFound('Story not found with id : '.$id);
+        Log::info('Get story by id: '.$id);
         return $story;
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Repositories\Helper\HelperInterface;
 use Faker\Core\File;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class PageRepository implements PageInterface
 {
@@ -21,6 +22,7 @@ class PageRepository implements PageInterface
         // TODO: Implement getAllPage() method.
         try {
             $pages = Page::with('image','texts.audio','texts.position','texts.position','interactions.positions','interactions.image','interactions.text')->get();
+            Log::info('Get all page');
             return $pages;
         }
         catch (QueryException $exception){
@@ -36,6 +38,7 @@ class PageRepository implements PageInterface
             if (!$page)
                 throw ErrorException::notFound('Page not found with id '.$id);
             $page->delete();
+            Log::info('Deleted a page with id: '.$id);
             return true;
         }
         catch (QueryException $exception){
@@ -53,6 +56,9 @@ class PageRepository implements PageInterface
             $page->page_number = $request->page_number;
             $page->story_id = $request->story_id;
             $page->save();
+            Log::info('Created a page',[
+                "page"=>$page
+            ]);
             return [
                 'success'=>true,
                 'message'=>'create page successfully',
@@ -74,7 +80,7 @@ class PageRepository implements PageInterface
             $page->page_number = $request->input('page_number');
             $page->story_id = $request->input('story_id');
             $page->save();
-
+            Log::info('Updated page with id: '. $request->query('id'));
             return $page;
         }
         catch (QueryException $exception){
@@ -89,6 +95,7 @@ class PageRepository implements PageInterface
             $story= Page::with('image','texts.audio','texts.position','texts.position','interactions.positions','interactions.image','interactions.text')->find($id);
             if (!$story)
                 throw ErrorException::notFound('Page not found with id '.$id);
+            Log::info('Get page by id: '.$id);
             return $story;
         }catch (QueryException $exception){
             throw ErrorException::queryFailed($exception->getMessage());
