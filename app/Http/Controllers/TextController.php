@@ -41,17 +41,28 @@ class TextController extends Controller
         ],Response::HTTP_OK);
     }
     public function update (TextStoreRequest $request) {
-        $text = $this->textRepository->updateText($request);
+        $text = $this->textRepository->updateText(
+            $request->query('id'),
+            $request->input('text'),
+            $request->input('icon'),
+            $request->input('wordSync'),
+        );
         return \response([
             'success'=>true,
             'message'=>'updated text',
+            'data'=>$text
         ],Response::HTTP_OK);
     }
     public function create (TextStoreRequest $request) {
-        $text = $this->textRepository->createText($request);
+        $text = $this->textRepository->createText(
+            $request->input('text'),
+            $request->input('icon'),
+            $request->input('wordSync'),
+        );
         return \response([
             'success'=>true,
             'message'=>'created text',
+            'data'=>$text
         ],Response::HTTP_OK);
     }
 }

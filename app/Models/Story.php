@@ -13,6 +13,7 @@ class Story extends Model
     use HasFactory;
     protected $table = 'stories';
     protected $primaryKey = 'id';
+    public $incrementing = false;
     public $timestamps = true;
     protected $fillable = ['id','title','image_id','author','illustrator','level','coin'];
     protected $hidden = ['image_id'];

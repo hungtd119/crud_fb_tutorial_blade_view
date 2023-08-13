@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\PageNotFoundException;
 use App\Http\Requests\PageStoreRequest;
 use App\Http\Resources\DataCollection;
 use App\Models\Page;
@@ -13,56 +12,65 @@ use Illuminate\Routing\Controller;
 class PageController extends Controller
 {
     public $pageRepository;
+
     public function __construct(PageInterface $pageRepository)
     {
         $this->pageRepository = $pageRepository;
     }
 
-    public function index (){
+    public function index()
+    {
         $page = $this->pageRepository->getAllPage();
-        return response(new DataCollection($page),200);
+        return response(new DataCollection($page), 200);
     }
-    public function findById($id){
-        try {
-            $page = $this->pageRepository->getPageById($id);
-            return response([
-                'success'=>true,
-                'message'=>'find page by id',
-                'data'=>$page
-            ]);
-        }catch (PageNotFoundException $exception){
-            throw $exception;
-        }
+
+    public function findById($id)
+    {
+        $page = $this->pageRepository->getPageById($id);
+        return response([
+            'success' => true,
+            'message' => 'find page by id',
+            'data' => $page
+        ]);
+
     }
-    public function create (PageStoreRequest $request){
-        $createdPage = $this->pageRepository->createPage($request);
-        if ($createdPage['success'])
-            return \response($createdPage,200);
-        return \response($createdPage,404);
+
+    public function create(PageStoreRequest $request)
+    {
+        $createdPage = $this->pageRepository->createPage(
+            $request->input('image_id'),
+            $request->input('page_number'),
+            $request->input('story_id'),
+        );
+        return \response([
+            'success' => true,
+            'message' => 'Created a new Page',
+            'data' => $createdPage
+        ]);
     }
-    public function delete ($id){
-        try {
-            $deletedPage = $this->pageRepository->deletePage($id);
-            return response([
-                'success'=>true,
-                'message'=>'deleted page',
-            ]);
-        }
-        catch (PageNotFoundException $exception){
-            throw $exception;
-        }
+
+    public function delete($id)
+    {
+        $deletedPage = $this->pageRepository->deletePage($id);
+        return response([
+            'success' => true,
+            'message' => 'deleted page',
+        ]);
+
     }
-    public function update (PageStoreRequest $request){
-        try {
-            $updatedPage = $this->pageRepository->updatePage($request);
-            return response([
-                'success'=>true,
-                'message'=>'updated page',
-                'data'=>$updatedPage
-            ]);
-        }
-        catch (PageNotFoundException $exception){
-            throw $exception;
-        }
+
+    public function update(PageStoreRequest $request)
+    {
+        $updatedPage = $this->pageRepository->updatePage(
+            $request->query('id'),
+            $request->input('image_id'),
+            $request->input('page_number'),
+            $request->input('story_id'),
+        );
+        return response([
+            'success' => true,
+            'message' => 'updated page',
+            'data' => $updatedPage
+        ]);
     }
 }

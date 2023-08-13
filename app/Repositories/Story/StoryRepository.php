@@ -10,6 +10,7 @@ use App\Models\Story;
 use App\Repositories\Helper\HelperInterface;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 
 class StoryRepository implements StoryInterface
 {
@@ -44,46 +45,42 @@ class StoryRepository implements StoryInterface
         return true;
     }
 
-    public function createStory(StoreStoryRequest $request)
+    public function createStory($title,$imageId,$author,$illustrator,$level,$coin)
     {
         // TODO: Implement createStory() method.
         try {
             $story = new Story();
             $story->id = $this->helperRepository->generateUniqueCode('Story');
-            $story->title = $request->title;
-            $story-> image_id = $request->image_id;
-            $story->author = $request->author;
-            $story->illustrator = $request->illustrator;
-            $story->level = $request->level;
-            $story->coin = $request->coin;
+            $story->title = $title;
+            $story-> image_id = $imageId;
+            $story->author = $author;
+            $story->illustrator = $illustrator;
+            $story->level = $level;
+            $story->coin = $coin;
             $story->save();
             Log::info('Created a story',[
                 'story'=>$story
             ]);
-            return [
-                "success"=>true,
-                "message"=>"inserted story success",
-                "data"=>$story
-            ];
+            return $story;
         }
         catch (QueryException $exception){
             throw ErrorException::queryFailed($exception->getMessage());
         }
     }
 
-    public function updateStory(StoreStoryRequest $request)
+    public function updateStory($id,$title,$imageId,$author,$illustrator,$level,$coin)
     {
         // TODO: Implement updateStory() method.
-        $story = Story::find($request->query('id'));
+        $story = Story::find($id);
         if (!$story)
             throw ErrorException::notFound();
-        $story->title = $request->input('title');
-        $story->image_id = $request->input('image_id');
-        $story->author = $request->input('author');
-        $story->illustrator = $request->input('illustrator');
-        $story->level = $request->input('level');
+        $story->title = $title;
+        $story->image_id = $imageId;
+        $story->author = $author;
+        $story->illustrator = $illustrator;
+        $story->level = $level;
         $story->save();
-        Log::info('Updated a story with id: '.$request->query('id'));
+        Log::info('Updated a story with id: '. $id);
         return $story;
     }
 

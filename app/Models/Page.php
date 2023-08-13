@@ -14,6 +14,7 @@ class Page extends Model
     use HasFactory;
     protected $table = 'pages';
     protected $primaryKey = 'id';
+    public $incrementing = false;
     public $timestamps = true;
     protected $fillable = ['id','image_id','page_number','story_id'];
     protected $hidden = ['image_id','story_id'];

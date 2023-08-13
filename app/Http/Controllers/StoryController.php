@@ -25,44 +25,51 @@ class StoryController extends Controller
         return \response(new DataCollection($stories),200);
     }
     public function findById($id){
-        try {
             $story = $this->storyRepository->getStoryById($id);
             return \response([
                 'success'=>true,
                 'message'=>'find story by id',
                 'data'=>$story
             ]);
-        }catch (StoryNotFoundException $exception){
-            throw $exception;
-        }
     }
     public function delete ($id){
-        try {
-            $deletedStory = $this->storyRepository->deleteStory($id);
-            return \response([
-                'success'=>true,
-                'message'=>'deleted story'
-            ]);
-        }catch (StoryNotFoundException $exception){
-            throw $exception;
-        }
+
+        $deletedStory = $this->storyRepository->deleteStory($id);
+        return \response([
+            'success'=>true,
+            'message'=>'deleted story'
+        ]);
+
     }
     public function create(StoreStoryRequest $request){
-        $creatdStory = $this->storyRepository->createStory($request);
-        if ($creatdStory['success'])
-            return \response($creatdStory,200);
-        return \response($creatdStory,404);
+        $createdStory = $this->storyRepository->createStory(
+            $request->input('title'),
+            $request->input('image_id'),
+            $request->input('author'),
+            $request->input('illustrator'),
+            $request->input('level'),
+            $request->input('coin')
+        );
+        return \response([
+            'success'=>true,
+            'message'=> 'Created a new Story',
+            'data'=>$createdStory
+        ]);
     }
     public function update (StoreStoryRequest $request){
-        try {
-            $updatedStory = $this->storyRepository->updateStory($request);
-            return \response([
-                'success'=>true,
-                'message'=>'updated story',
-                'data'=>$updatedStory
-            ],200);
-        }catch (StoryNotFoundException $exception){
-            throw new $exception;
-        }
+        $updatedStory = $this->storyRepository->updateStory(
+            $request->query('id'),
+            $request->input('title'),
+            $request->input('image_id'),
+            $request->input('author'),
+            $request->input('illustrator'),
+            $request->input('level'),
+            $request->input('coin')
+        );
+        return \response([
+            'success'=>true,
+            'message'=>'updated story',
+            'data'=>$updatedStory
+        ],200);
     }
 }

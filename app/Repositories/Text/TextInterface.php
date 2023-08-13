@@ -9,7 +9,7 @@ interface TextInterface
 {
     public function getAllTexts();
     public function getTextById($id);
-    public function createText(TextStoreRequest $request);
-    public function updateText(TextStoreRequest $request);
+    public function createText($textContent,$icon,$wordSync);
+    public function updateText($id,$textContent,$icon,$wordSync);
     public function deleteText($id);
 }

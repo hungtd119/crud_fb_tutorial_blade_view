@@ -10,6 +10,6 @@ interface StoryInterface
     public function getStoryById($id);
     public function deleteStory($id);
 
-    public function createStory(StoreStoryRequest $request);
-    public function updateStory(StoreStoryRequest $request);
+    public function createStory($title,$imageId,$author,$illustrator,$level,$coin);
+    public function updateStory($id,$title,$imageId,$author,$illustrator,$level,$coin);
 }

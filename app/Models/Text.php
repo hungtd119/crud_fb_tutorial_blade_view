@@ -14,6 +14,7 @@ class Text extends Model
     use HasFactory;
     protected $table = 'texts';
     protected $primaryKey = 'id';
+    public $incrementing = false;
     public $timestamps = true;
     protected $fillable = ['id','text','icon','wordSync'];
     protected $hidden = ['audio_id','pivot'];

@@ -9,6 +9,6 @@ interface PageInterface
     public function getAllPage ();
     public function getPageById($id);
     public function deletePage ($id);
-    public function createPage(PageStoreRequest $request);
-    public function updatePage(PageStoreRequest $request);
+    public function createPage($imageId,$pageNumber,$storyId);
+    public function updatePage($id,$imageId,$pageNumber,$storyId);
 }

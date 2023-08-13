@@ -13,6 +13,7 @@ class Audio extends Model
     use HasFactory;
     protected $table = "audios";
     protected $primaryKey = 'id';
+    public $incrementing = false;
     public $timestamps = true;
     protected $fillable = ['id','filename','path','time','text_id'];
     protected $hidden = ['text_id'];

@@ -8,6 +8,7 @@ use App\Models\Text;
 use App\Repositories\Helper\HelperInterface;
 use http\Env\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class TextRepository implements TextInterface
 {
@@ -21,6 +22,7 @@ class TextRepository implements TextInterface
         // TODO: Implement getAllTexts() method.
         try {
             $texts = Text::with('audio')->get();
+            Log::info('Get all Texts');
             return $texts;
         }
         catch (QueryException $exception){
@@ -35,40 +37,42 @@ class TextRepository implements TextInterface
             $text = Text::with('audio')->find($id);
             if (!$text)
                 throw ErrorException::notFound('Text not found with id '.$id);
+            Log::info('Get text by id');
             return $text;
         }catch (QueryException $exception){
             throw ErrorException::queryFailed($exception);
         }
     }
 
-    public function createText(TextStoreRequest $request)
+    public function createText($textContent,$icon,$wordSync)
     {
         // TODO: Implement createText() method.
         try {
             $text = new Text();
             $text->id = $this->helperRepository->generateUniqueCode('Text');
-            $text->text = $request->input('text');
-            $text->icon = $request->input('icon');
-            $text->wordSync = $request->input('wordSync');
-
+            $text->text = $textContent;
+            $text->icon = $icon;
+            $text->wordSync = $wordSync;
             $text->save();
+            Log::info('Created a new Text');
             return $text;
         }catch (QueryException $exception){
             throw ErrorException::queryFailed($exception);
         }
     }
 
-    public function updateText(TextStoreRequest $request)
+    public function updateText($id,$textContent,$icon,$wordSync)
     {
         // TODO: Implement updateText() method.
         try {
-            $text = Text::find($request->query('id'));
+            $text = Text::find($id);
             if (!$text)
-                throw ErrorException::notFound('Text not found with id '.$request->query('id'));
-            $text->text = $request->input('text');
-            $text->icon = $request->input('icon');
-            $text->wordSync = $request->input('wordSync');
+                throw ErrorException::notFound('Text not found with id '.$id);
+            $text->text = $textContent;
+            $text->icon = $icon;
+            $text->wordSync = $wordSync;
             $text->save();
+            Log::info('Updated text with id: '.$id);
             return $text;
         }
         catch (QueryException $exception){
@@ -84,6 +88,7 @@ class TextRepository implements TextInterface
             if (!$text)
                 throw ErrorException::notFound('Text not found with id '.$id);
             $text->delete();
+            Log::info('Deleted Text with id: '.$id);
             return true;
         }catch (QueryException $exception){
             throw ErrorException::queryFailed($exception->getMessage());

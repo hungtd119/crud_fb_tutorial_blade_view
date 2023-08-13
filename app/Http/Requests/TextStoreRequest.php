@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class TextStoreRequest extends FormRequest
 {
@@ -27,6 +29,22 @@ class TextStoreRequest extends FormRequest
             'text'=>'required|unique:texts',
             'icon'=>'required',
             'wordSync'=>'required',
+        ];
+    }
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success'=> false,
+            'message'=> 'Validation errors',
+            'data'   => $validator->errors()
+        ],404));
+    }
+    public function messages()
+    {
+        return [
+            'text.required' => 'Text is required',
+            'icon.required' => 'Icon is required',
+            'wordSync.required' => 'WordSync is required'
         ];
     }
 }

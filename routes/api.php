@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Middleware\CheckParentRecordStory;
 use App\Http\Middleware\CheckParentRecordImage;
 use App\Http\Controllers\TextController;
+use App\Http\Controllers\AudioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,11 @@ Route::prefix('text')->group(function (){
     Route::delete('/{id}',[TextController::class,'delete']);
     Route::post('/',[TextController::class,'create']);
     Route::put('/',[TextController::class,'update']);
+});
+Route::prefix('audio')->group(function (){
+    Route::get('/',[AudioController::class,'index']);
+    Route::get('/find/{id}',[AudioController::class,'findById']);
+    Route::delete('/{id}',[AudioController::class,'delete']);
+    Route::post('/',[AudioController::class,'create']);
+    Route::put('/',[AudioController::class,'update']);
 });
